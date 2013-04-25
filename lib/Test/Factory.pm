@@ -6,7 +6,7 @@ our $VERSION = "0.01";
 
 use parent 'Exporter';
 
-our @EXPORT = qw/factory/;
+our @EXPORT = qw/factory dsn build create attributes_for/;
 
 my %INSTANCE;
 my %CLASS_SLOT;
@@ -18,13 +18,6 @@ sub import {
     require strict; import strict;
     require warnings; import warnings;
 
-    do {
-        no strict 'refs';
-        *{"${caller}::dsn"}    = \&dsn;
-        *{"${caller}::build"}  = \&build;
-        *{"${caller}::create"} = \&create;
-        *{"${caller}::attributes_for"} = \&attributes_for;
-    };
     $INSTANCE{$caller} = +{ info => {} };
 
     $class->export_to_level(1, @_);

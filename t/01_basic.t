@@ -22,8 +22,12 @@ create table foo (
 ]);
 
 use t::Test1;
+use t::Test2;
 
 t::Test1->dsn($mysqld->dsn(dbname => 'test'));
+
+ok(t::Test1->can('factory'));
+ok(!t::Test2->can('factory'));
 
 my $foo1 = t::Test1->build('foo');
 ok $foo1;
